@@ -85,7 +85,7 @@
             // 
             lblSubtitulo.AutoSize = true;
             lblSubtitulo.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSubtitulo.Location = new Point(178, 52);
+            lblSubtitulo.Location = new Point(171, 52);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(139, 20);
             lblSubtitulo.TabIndex = 1;
@@ -281,7 +281,7 @@
             // 
             cboCuotas.DropDownStyle = ComboBoxStyle.DropDownList;
             cboCuotas.FormattingEnabled = true;
-            cboCuotas.Items.AddRange(new object[] { "1 cuota", "3 cuotas", "6 cuotas" });
+            cboCuotas.Items.AddRange(new object[] { "1 cuota 0% recargo", "3 cuotas 10% de recargo", "6 cuotas 20% recargo" });
             cboCuotas.Location = new Point(155, 71);
             cboCuotas.Name = "cboCuotas";
             cboCuotas.Size = new Size(107, 23);
