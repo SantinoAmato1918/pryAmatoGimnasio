@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInscripcion));
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             gpbDatosPersonales = new GroupBox();
@@ -98,17 +99,18 @@
             gpbDatosPersonales.Controls.Add(lblEdad);
             gpbDatosPersonales.Controls.Add(txtNombre);
             gpbDatosPersonales.Controls.Add(lblNombre);
+            gpbDatosPersonales.Controls.Add(chkEstudiante);
             gpbDatosPersonales.Location = new Point(35, 90);
             gpbDatosPersonales.Name = "gpbDatosPersonales";
-            gpbDatosPersonales.Size = new Size(308, 106);
-            gpbDatosPersonales.TabIndex = 2;
+            gpbDatosPersonales.Size = new Size(308, 123);
+            gpbDatosPersonales.TabIndex = 0;
             gpbDatosPersonales.TabStop = false;
             gpbDatosPersonales.Text = "Datos Personales";
             // 
             // lblAños
             // 
             lblAños.AutoSize = true;
-            lblAños.Location = new Point(148, 74);
+            lblAños.Location = new Point(148, 70);
             lblAños.Name = "lblAños";
             lblAños.Size = new Size(32, 15);
             lblAños.TabIndex = 4;
@@ -116,15 +118,17 @@
             // 
             // txtEdad
             // 
-            txtEdad.Location = new Point(94, 66);
+            txtEdad.Location = new Point(94, 62);
+            txtEdad.MaxLength = 3;
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(48, 23);
-            txtEdad.TabIndex = 3;
+            txtEdad.TabIndex = 1;
+            txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // lblEdad
             // 
             lblEdad.AutoSize = true;
-            lblEdad.Location = new Point(26, 74);
+            lblEdad.Location = new Point(26, 70);
             lblEdad.Name = "lblEdad";
             lblEdad.Size = new Size(33, 15);
             lblEdad.TabIndex = 2;
@@ -133,9 +137,11 @@
             // txtNombre
             // 
             txtNombre.Location = new Point(94, 29);
+            txtNombre.MaxLength = 30;
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(197, 23);
-            txtNombre.TabIndex = 1;
+            txtNombre.TabIndex = 0;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // lblNombre
             // 
@@ -149,10 +155,10 @@
             // chkEstudiante
             // 
             chkEstudiante.AutoSize = true;
-            chkEstudiante.Location = new Point(26, 23);
+            chkEstudiante.Location = new Point(28, 98);
             chkEstudiante.Name = "chkEstudiante";
             chkEstudiante.Size = new Size(114, 19);
-            chkEstudiante.TabIndex = 5;
+            chkEstudiante.TabIndex = 2;
             chkEstudiante.Text = "Estudiante (15%)";
             chkEstudiante.UseVisualStyleBackColor = true;
             // 
@@ -164,8 +170,8 @@
             gpbPlanTurno.Controls.Add(lblPlan);
             gpbPlanTurno.Location = new Point(369, 90);
             gpbPlanTurno.Name = "gpbPlanTurno";
-            gpbPlanTurno.Size = new Size(308, 106);
-            gpbPlanTurno.TabIndex = 3;
+            gpbPlanTurno.Size = new Size(308, 123);
+            gpbPlanTurno.TabIndex = 1;
             gpbPlanTurno.TabStop = false;
             gpbPlanTurno.Text = "Plan y Turno";
             // 
@@ -177,7 +183,7 @@
             cboTurno.Location = new Point(98, 74);
             cboTurno.Name = "cboTurno";
             cboTurno.Size = new Size(121, 23);
-            cboTurno.TabIndex = 3;
+            cboTurno.TabIndex = 1;
             // 
             // cboPlan
             // 
@@ -187,7 +193,7 @@
             cboPlan.Location = new Point(98, 34);
             cboPlan.Name = "cboPlan";
             cboPlan.Size = new Size(121, 23);
-            cboPlan.TabIndex = 2;
+            cboPlan.TabIndex = 0;
             // 
             // lblTurno
             // 
@@ -213,7 +219,7 @@
             gpbAdicionales.Location = new Point(371, 219);
             gpbAdicionales.Name = "gpbAdicionales";
             gpbAdicionales.Size = new Size(308, 57);
-            gpbAdicionales.TabIndex = 4;
+            gpbAdicionales.TabIndex = 3;
             gpbAdicionales.TabStop = false;
             gpbAdicionales.Text = "Adicionales";
             // 
@@ -235,7 +241,7 @@
             gpbMesesInscripcion.Location = new Point(35, 219);
             gpbMesesInscripcion.Name = "gpbMesesInscripcion";
             gpbMesesInscripcion.Size = new Size(305, 57);
-            gpbMesesInscripcion.TabIndex = 5;
+            gpbMesesInscripcion.TabIndex = 2;
             gpbMesesInscripcion.TabStop = false;
             gpbMesesInscripcion.Text = "Meses de Inscripción";
             // 
@@ -251,9 +257,11 @@
             // txtMeses
             // 
             txtMeses.Location = new Point(136, 20);
+            txtMeses.MaxLength = 2;
             txtMeses.Name = "txtMeses";
             txtMeses.Size = new Size(52, 23);
-            txtMeses.TabIndex = 1;
+            txtMeses.TabIndex = 0;
+            txtMeses.KeyPress += txtMeses_KeyPress;
             // 
             // lblMeses
             // 
@@ -272,8 +280,8 @@
             gpbFormaPago.Controls.Add(rbtEfectivo);
             gpbFormaPago.Location = new Point(371, 295);
             gpbFormaPago.Name = "gpbFormaPago";
-            gpbFormaPago.Size = new Size(308, 133);
-            gpbFormaPago.TabIndex = 6;
+            gpbFormaPago.Size = new Size(308, 111);
+            gpbFormaPago.TabIndex = 4;
             gpbFormaPago.TabStop = false;
             gpbFormaPago.Text = "Forma de Pago";
             // 
@@ -284,8 +292,8 @@
             cboCuotas.Items.AddRange(new object[] { "1 cuota 0% recargo", "3 cuotas 10% de recargo", "6 cuotas 20% recargo" });
             cboCuotas.Location = new Point(155, 71);
             cboCuotas.Name = "cboCuotas";
-            cboCuotas.Size = new Size(107, 23);
-            cboCuotas.TabIndex = 3;
+            cboCuotas.Size = new Size(127, 23);
+            cboCuotas.TabIndex = 2;
             // 
             // lblCantidadCuotas
             // 
@@ -321,22 +329,24 @@
             // btnCalcular
             // 
             btnCalcular.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCalcular.Location = new Point(485, 434);
+            btnCalcular.Location = new Point(509, 412);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(87, 23);
-            btnCalcular.TabIndex = 7;
+            btnCalcular.TabIndex = 5;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // btnLimpiar
             // 
             btnLimpiar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnLimpiar.Location = new Point(578, 434);
+            btnLimpiar.Location = new Point(602, 412);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(75, 23);
             btnLimpiar.TabIndex = 8;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // gpbDescuentosEdad
             // 
@@ -345,10 +355,9 @@
             gpbDescuentosEdad.Controls.Add(lblMayor);
             gpbDescuentosEdad.Controls.Add(lblMenor);
             gpbDescuentosEdad.Controls.Add(lblDescEdad);
-            gpbDescuentosEdad.Controls.Add(chkEstudiante);
             gpbDescuentosEdad.Location = new Point(35, 295);
             gpbDescuentosEdad.Name = "gpbDescuentosEdad";
-            gpbDescuentosEdad.Size = new Size(308, 133);
+            gpbDescuentosEdad.Size = new Size(308, 111);
             gpbDescuentosEdad.TabIndex = 9;
             gpbDescuentosEdad.TabStop = false;
             gpbDescuentosEdad.Text = "Descuentos por edad / estudiante";
@@ -356,7 +365,7 @@
             // lblEnOtroCaso
             // 
             lblEnOtroCaso.AutoSize = true;
-            lblEnOtroCaso.Location = new Point(23, 104);
+            lblEnOtroCaso.Location = new Point(28, 85);
             lblEnOtroCaso.Name = "lblEnOtroCaso";
             lblEnOtroCaso.Size = new Size(159, 15);
             lblEnOtroCaso.TabIndex = 10;
@@ -365,7 +374,7 @@
             // lblEstudiante
             // 
             lblEstudiante.AutoSize = true;
-            lblEstudiante.Location = new Point(23, 89);
+            lblEstudiante.Location = new Point(28, 70);
             lblEstudiante.Name = "lblEstudiante";
             lblEstudiante.Size = new Size(98, 15);
             lblEstudiante.TabIndex = 9;
@@ -374,7 +383,7 @@
             // lblMayor
             // 
             lblMayor.AutoSize = true;
-            lblMayor.Location = new Point(23, 74);
+            lblMayor.Location = new Point(28, 55);
             lblMayor.Name = "lblMayor";
             lblMayor.Size = new Size(118, 15);
             lblMayor.TabIndex = 8;
@@ -383,7 +392,7 @@
             // lblMenor
             // 
             lblMenor.AutoSize = true;
-            lblMenor.Location = new Point(23, 60);
+            lblMenor.Location = new Point(28, 41);
             lblMenor.Name = "lblMenor";
             lblMenor.Size = new Size(137, 15);
             lblMenor.TabIndex = 7;
@@ -392,7 +401,7 @@
             // lblDescEdad
             // 
             lblDescEdad.AutoSize = true;
-            lblDescEdad.Location = new Point(23, 45);
+            lblDescEdad.Location = new Point(28, 26);
             lblDescEdad.Name = "lblDescEdad";
             lblDescEdad.Size = new Size(211, 15);
             lblDescEdad.TabIndex = 6;
@@ -410,9 +419,10 @@
             // 
             // frmInscripcion
             // 
+            AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(692, 470);
+            ClientSize = new Size(692, 444);
             Controls.Add(pictureBox1);
             Controls.Add(gpbDescuentosEdad);
             Controls.Add(btnLimpiar);
@@ -425,10 +435,12 @@
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "frmInscripcion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gimnasio Siglo — Inscripción";
+            Load += frmInscripcion_Load;
             gpbDatosPersonales.ResumeLayout(false);
             gpbDatosPersonales.PerformLayout();
             gpbPlanTurno.ResumeLayout(false);
@@ -456,7 +468,6 @@
         private Label lblEdad;
         private TextBox txtNombre;
         private Label lblNombre;
-        private CheckBox chkEstudiante;
         private GroupBox gpbPlanTurno;
         private ComboBox cboTurno;
         private ComboBox cboPlan;
@@ -482,5 +493,6 @@
         private Label lblMenor;
         private Label lblDescEdad;
         private PictureBox pictureBox1;
+        private CheckBox chkEstudiante;
     }
 }
