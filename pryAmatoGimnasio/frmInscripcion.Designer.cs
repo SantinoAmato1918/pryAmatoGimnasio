@@ -123,6 +123,7 @@
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(48, 23);
             txtEdad.TabIndex = 1;
+            txtEdad.TextChanged += txtNombre_TextChanged;
             txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // lblEdad
@@ -141,6 +142,7 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(197, 23);
             txtNombre.TabIndex = 0;
+            txtNombre.TextChanged += txtNombre_TextChanged;
             txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // lblNombre
@@ -261,6 +263,7 @@
             txtMeses.Name = "txtMeses";
             txtMeses.Size = new Size(52, 23);
             txtMeses.TabIndex = 0;
+            txtMeses.TextChanged += txtNombre_TextChanged;
             txtMeses.KeyPress += txtMeses_KeyPress;
             // 
             // lblMeses
