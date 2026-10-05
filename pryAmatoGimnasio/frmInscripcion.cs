@@ -90,6 +90,23 @@ namespace pryAmatoGimnasio
                 return;
             }
 
+            string plan = cboPlan.Text;
+            switch(plan)
+            {
+                case "Musculación":
+                    precioMensual = PRECIO_MUSCULACION;
+                    break;
+                case "Funcional":
+                    precioMensual = PRECIO_FUNCIONAL;
+                    break;
+                case "Natación":
+                    precioMensual = PRECIO_NATACION;
+                    break;
+                default:
+                    MessageBox.Show("Seleccione un plan válido.");
+                    return;
+            }   
+
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
