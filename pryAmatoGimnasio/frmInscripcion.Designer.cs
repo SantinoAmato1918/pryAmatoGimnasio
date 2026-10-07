@@ -292,16 +292,16 @@
             // 
             cboCuotas.DropDownStyle = ComboBoxStyle.DropDownList;
             cboCuotas.FormattingEnabled = true;
-            cboCuotas.Items.AddRange(new object[] { "1 cuota 0% recargo", "3 cuotas 10% de recargo", "6 cuotas 20% recargo" });
-            cboCuotas.Location = new Point(155, 71);
+            cboCuotas.Items.AddRange(new object[] { "1", "3", "6" });
+            cboCuotas.Location = new Point(138, 71);
             cboCuotas.Name = "cboCuotas";
-            cboCuotas.Size = new Size(127, 23);
+            cboCuotas.Size = new Size(164, 23);
             cboCuotas.TabIndex = 2;
             // 
             // lblCantidadCuotas
             // 
             lblCantidadCuotas.AutoSize = true;
-            lblCantidadCuotas.Location = new Point(38, 74);
+            lblCantidadCuotas.Location = new Point(27, 74);
             lblCantidadCuotas.Name = "lblCantidadCuotas";
             lblCantidadCuotas.Size = new Size(111, 15);
             lblCantidadCuotas.TabIndex = 2;
@@ -317,6 +317,7 @@
             rbtTarjeta.TabStop = true;
             rbtTarjeta.Text = "Tarjeta";
             rbtTarjeta.UseVisualStyleBackColor = true;
+            rbtTarjeta.CheckedChanged += rbtTarjeta_CheckedChanged;
             // 
             // rbtEfectivo
             // 

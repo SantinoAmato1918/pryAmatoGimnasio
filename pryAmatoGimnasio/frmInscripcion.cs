@@ -29,7 +29,6 @@ namespace pryAmatoGimnasio
         const decimal RECARGO_3_CUOTAS = 0.10m;
         const decimal RECARGO_6_CUOTAS = 0.20m;
 
-
         public frmInscripcion()
         {
             InitializeComponent();
@@ -37,10 +36,10 @@ namespace pryAmatoGimnasio
 
         private void EstadoInicial()
         {
-            // EstadoInicial = método propio que usamos para dejar el formulario
-            // siempre en su estado inicial. Se llama cuando se abre el formulario y
-            // también cuando apretamos Limpiar. De esta manera no repetimos el mismo
-            // código en diferentes eventos
+            //EstadoInicial es un método que usamos para dejar el formulario
+            //siempre en su estado inicial. Se llama cuando se abre el formulario y
+            //también cuando apretamos Limpiar. De esta manera no repetimos el mismo
+            //código en diferentes eventos
             txtNombre.Clear();
             txtEdad.Clear();
             txtMeses.Text = "1";
@@ -58,23 +57,22 @@ namespace pryAmatoGimnasio
 
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
-            // Evento Load del formulario: se ejecuta automáticamente cuando se abre
-            // el formulario. Acá llamamos al método EstadoInicial() para que todos
-            // los controles queden configurados con el estado inicial que pusimos arriba
+            //El Evento Load del formulario se ejecuta automáticamente cuando se abre
+            //el formulario. Acá llamamos al método EstadoInicial() para que todos
+            //los controles queden configurados con el estado inicial que pusimos arriba
             EstadoInicial();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            
+
             EstadoInicial();
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             //Para Edad y Meses usamos int.Parse porque el TextBox
-            //devuelve texto (string), pero necesitamos convertirlo a número entero (int)
-            //para hacer cálculos
+            //devuelve texto tipo string, pero necesitamos convertirlo a número entero tipo int
             string nombre = txtNombre.Text;
             int edad = int.Parse(txtEdad.Text);
             int meses = int.Parse(txtMeses.Text);
@@ -128,18 +126,103 @@ namespace pryAmatoGimnasio
                 //con el valor de la variable plan
                 default:
                     MessageBox.Show("Seleccione un plan válido.");
-                //return termina completamente el método porque no podemos continuar
-                //con el cálculo si el plan no es válido
+                    //return termina el método porque no podemos seguir
+                    //con el cálculo si el plan no es ninguno de los 3
                     return;
-            }   
+            }
+            //Guardamos en una variable string el horario del turno elegido
+            //Se inicializa vacío porque todavía no conocemos el turno
+            string horario = "";
+            //SelectedIndex va a decir la posición del elemento seleccionado en el ComboBox
+            switch (cboTurno.SelectedIndex)
+            {
+                case 0:
+                    horario = "7 a 12";
+                    break;
 
+                case 1:
+                    horario = "14 a 18";
+                    break;
+
+                case 2:
+                    horario = "18 a 23";
+                    break;
+
+                default:
+                    MessageBox.Show("Seleccione un turno válido.");
+                    return;
+            }
+            // += significa "sumar a la variable y guardar el nuevo resultado".
+            if (chkAdicional.Checked) precioMensual += PRECIO_CASILLERO;
+            subtotal = precioMensual * meses;
+
+            if (edad < 18)
+            {
+                porcentajeDescuento = DESCUENTO_MENOR;
+            }
+            else
+            {
+                if (edad >= 65)
+                {
+                    porcentajeDescuento = DESCUENTO_MAYOR;
+                }
+                else
+                {
+                    if (chkEstudiante.Checked)
+                    {
+                        porcentajeDescuento = DESCUENTO_ESTUDIANTE;
+                    }
+                    else
+                    {
+                        porcentajeDescuento = 0;
+                    }
+                }
+            }
+            subtotal = subtotal - (subtotal * porcentajeDescuento);
+
+
+            int cuotas = 0;
+
+            if (rbtEfectivo.Checked)
+            {
+                //El - es para que sea un descuento
+                porcentajeAjuste = -DESCUENTO_EFECTIVO;
+            }
+            else
+            {
+                //Esto va adentro porque si es en efectivo va a intentar convertir algo vacio y puede tirar error
+                cuotas = int.Parse(cboCuotas.Text);
+
+                if (cuotas == 1)
+                {
+                    porcentajeAjuste = 0;
+                }
+                else if (cuotas == 3)
+                {
+                    porcentajeAjuste = RECARGO_3_CUOTAS;
+                }
+                else if (cuotas == 6)
+                {
+                    porcentajeAjuste = RECARGO_6_CUOTAS;
+                }
+            }
+            total = subtotal + (subtotal * porcentajeAjuste);
+
+            //Operador ternario
+            string categoria = edad < 18 ? "Menor" : "Mayor";
+            string formaPago = rbtEfectivo.Checked
+                ? "Efectivo"
+                : "Tarjeta en " + cuotas + " cuotas";
+
+            //Aca si es efectivo, el valor de la cuota es el total
+            //y si es tarjeta el total se divide por la cantidad de cuotas
+            valorCuota = rbtEfectivo.Checked ? total : total / cuotas;
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Permitir solo números y tecla de retroceso
-            //KeyPress se ejecuta cada vez que el usuario presiona una tecla en el TextBox
-            //e.KeyChar representa el carácter de la tecla que se presiona
+            //e.KeyChar es el carácter de la tecla que se presiona
             //char.IsDigit() verifica si ese carácter es un dígito
             //El signo ! significa "NO", o sea que !char.IsDigit() significa "no es un número"
             //Keys.Back es la tecla de retroceso
@@ -148,7 +231,7 @@ namespace pryAmatoGimnasio
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 //Handled indica que nosotros ya manejamos esa tecla
-                //Si ponemostrue, la tecla se descarta y no aparece en el TextBox
+                //Si ponemos true la tecla se descarta y no aparece en el TextBox
                 e.Handled = true;
             }
         }
@@ -160,12 +243,11 @@ namespace pryAmatoGimnasio
             //sea diferente de un espacio. ' ' es un espacio como un carácter
             //Lo usamos para permitir escribir nombres compuestos
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != ' ')
-                {
-                    e.Handled = true;
-                }
+            {
+                e.Handled = true;
+            }
 
             //Cambiar minusculas a mayúsculas
-            //char.IsLower() verifica si el carácter es una letra minúscula
             //Si es minúscula, char.ToUpper() la convierte a mayúscula
             e.KeyChar = char.ToUpper(e.KeyChar);
         }
@@ -192,6 +274,22 @@ namespace pryAmatoGimnasio
             else
             {
                 btnCalcular.Enabled = false;
+            }
+        }
+
+        private void rbtTarjeta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtTarjeta.Checked)
+            {
+                cboCuotas.Enabled = true;
+                // SelectedIndex = 0 selecciona la primera opción del ComboBox
+                cboCuotas.SelectedIndex = 0;
+            }
+            else
+            {
+                cboCuotas.Enabled = false;
+                // SelectedIndex = -1 significa que no queda ninguna opción seleccionada
+                cboCuotas.SelectedIndex = -1;
             }
         }
     }
