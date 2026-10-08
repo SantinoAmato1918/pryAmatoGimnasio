@@ -29,6 +29,24 @@ namespace pryAmatoGimnasio
         const decimal RECARGO_3_CUOTAS = 0.10m;
         const decimal RECARGO_6_CUOTAS = 0.20m;
 
+
+        //El struct sirve para agrupar en una sola estructura los datos
+        // de una misma persona (nombre, edad, plan, total)
+        struct SOCIO
+        {
+            public string nombre;
+            public int edad;
+            public string categoria;
+            public string plan;
+            public string horario;
+            public int meses;
+            public string formaPago;
+            public decimal total;
+            public decimal valorCuota;
+        }
+        //Declara array de 1 dimension
+        string[] vecSocio = new string[3];
+
         public frmInscripcion()
         {
             InitializeComponent();
@@ -217,6 +235,55 @@ namespace pryAmatoGimnasio
             //Aca si es efectivo, el valor de la cuota es el total
             //y si es tarjeta el total se divide por la cantidad de cuotas
             valorCuota = rbtEfectivo.Checked ? total : total / cuotas;
+
+            SOCIO socio;
+            socio.nombre = nombre;
+            socio.edad = edad;
+            socio.categoria = categoria;
+            socio.plan = plan;
+            socio.horario = horario;
+            socio.meses = meses;
+            socio.formaPago = formaPago;
+            socio.total = total;
+            socio.valorCuota = valorCuota;
+
+            // Armar mensaje con todos los datos del socio
+            // \n es un salto de línea.
+            string mensaje =
+                "DATOS DEL SOCIO\n\n" +
+                "Nombre: " + socio.nombre + "\n" +
+                "Edad: " + socio.edad + " años\n" +
+                "Categoría: " + socio.categoria + "\n" +
+                "Plan: " + socio.plan + "\n" +
+                "Horario: " + socio.horario + "\n" +
+                "Meses: " + socio.meses + "\n" +
+                "Forma de pago: " + socio.formaPago + "\n" +
+                //ToString("C2") convierte los valores a texto y los muestra con formato
+                //de moneda y dos decimales
+                "Total: " + socio.total.ToString("C2") + "\n" +
+                "Valor de cuota: " + socio.valorCuota.ToString("C2");
+
+            //Grabar array
+            //Concatenar lo que tengo en el struct
+            //El indice tiene que incrementarse con cada click
+            //y tiene tope, 3 elementos (no permitir grabar mas)
+            vecSocio[0] = socio.nombre;
+
+
+            //Grabar en un txt
+            StreamWriter swDatosGimnasio = new StreamWriter("BaseDatos.txt", true);
+            swDatosGimnasio.WriteLine(socio.nombre);
+
+            swDatosGimnasio.WriteLine(socio.plan);
+            swDatosGimnasio.WriteLine(socio.valorCuota);
+            swDatosGimnasio.WriteLine(socio.total);
+
+            swDatosGimnasio.Close();
+
+            // Mostrar el mensaje con título e ícono de información.
+            MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            EstadoInicial();
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
@@ -292,5 +359,9 @@ namespace pryAmatoGimnasio
                 cboCuotas.SelectedIndex = -1;
             }
         }
+
+
+
+
     }
 }

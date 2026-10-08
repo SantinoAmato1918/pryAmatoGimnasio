@@ -293,9 +293,9 @@
             cboCuotas.DropDownStyle = ComboBoxStyle.DropDownList;
             cboCuotas.FormattingEnabled = true;
             cboCuotas.Items.AddRange(new object[] { "1", "3", "6" });
-            cboCuotas.Location = new Point(138, 71);
+            cboCuotas.Location = new Point(146, 71);
             cboCuotas.Name = "cboCuotas";
-            cboCuotas.Size = new Size(164, 23);
+            cboCuotas.Size = new Size(79, 23);
             cboCuotas.TabIndex = 2;
             // 
             // lblCantidadCuotas
