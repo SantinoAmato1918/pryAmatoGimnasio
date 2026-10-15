@@ -46,6 +46,8 @@ namespace pryAmatoGimnasio
         }
         //Declara array de 1 dimension
         string[] vecSocio = new string[3];
+        //Indice para el array
+        int indeRegistro = 0;
 
         public frmInscripcion()
         {
@@ -263,13 +265,6 @@ namespace pryAmatoGimnasio
                 "Total: " + socio.total.ToString("C2") + "\n" +
                 "Valor de cuota: " + socio.valorCuota.ToString("C2");
 
-            //Grabar array
-            //Concatenar lo que tengo en el struct
-            //El indice tiene que incrementarse con cada click
-            //y tiene tope, 3 elementos (no permitir grabar mas)
-            vecSocio[0] = socio.nombre;
-
-
             //Grabar en un txt
             StreamWriter swDatosGimnasio = new StreamWriter("BaseDatos.txt", true);
             swDatosGimnasio.WriteLine(socio.nombre);
@@ -279,6 +274,20 @@ namespace pryAmatoGimnasio
             swDatosGimnasio.WriteLine(socio.total);
 
             swDatosGimnasio.Close();
+
+            //Grabar array
+            //Concatenar lo que tengo en el struct
+            //El indice tiene que incrementarse con cada click
+            //y tiene tope, 3 elementos (no permitir grabar mas)
+            vecSocio[0] = socio.nombre;
+            indeRegistro += 1;
+
+            if (indeRegistro == vecSocio.Length)
+            {
+                MessageBox.Show("Array completo");
+                btnCalcular.Visible = false;
+            }
+
 
             // Mostrar el mensaje con título e ícono de información.
             MessageBox.Show(mensaje, "Datos del Socio", MessageBoxButtons.OK, MessageBoxIcon.Information);
